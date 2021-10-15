@@ -49,7 +49,8 @@ class TeamsController < ApplicationController
 
   def assigin_owner
 #チームのオーナーが変更になったら、新しいオーナーに通知メール
-  @team.update(owner_id: params[:owner_id])
+  @team = Team.find(params[:id])
+  @team.update(owner_id: params[:user])
   @user = User.find(@team.owner_id)
   OwenerChangeMailer.owner_change_mail(@user).deliver
 
