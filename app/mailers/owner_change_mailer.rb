@@ -1,4 +1,4 @@
-class OwenerChangeMailer <AgendaDeletedMailer
+class OwnerChangeMailer <ApplicationMailer
   default from: 'from@example.com'
 
   def owner_change_mail(user)

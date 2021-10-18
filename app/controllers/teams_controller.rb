@@ -47,14 +47,12 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
-  def assigin_owner
+  def assign_owner
 #チームのオーナーが変更になったら、新しいオーナーに通知メール
-  @team = Team.find(params[:id])
-  @team.update(owner_id: params[:user])
-  @user = User.find(@team.owner_id)
-  OwenerChangeMailer.owner_change_mail(@user).deliver
-
-  redirect_to team_path, notice: "#{@team.name}チームのオーナーが変更されました"
+    @team.update(owner_id: params[:owner_id])
+    @user = User.find(@team.owner_id)
+    OwnerChangeMailer.owner_change_mail(@user).deliver
+    redirect_to team_path, notice: "#{@team.name}チームのオーナーが変更されました"
   end
 
 

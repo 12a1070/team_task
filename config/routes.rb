@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     end
 
     member do
-      get :assigin_owner
+      post :assign_owner
     end
   end
 
